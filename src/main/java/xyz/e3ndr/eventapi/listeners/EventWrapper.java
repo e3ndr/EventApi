@@ -16,11 +16,11 @@ public class EventWrapper {
     private final @NonNull Object listener;
     private final @NonNull Method method;
 
-    public void call(@NonNull AbstractEvent<?> event) {
+    public void call(@NonNull AbstractEvent<?> event) throws InvocationTargetException {
         if (EventHelper.checkListenerExecution(this.method, event, this.annotation)) {
             try {
                 this.method.invoke(this.listener, event);
-            } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+            } catch (IllegalAccessException | IllegalArgumentException e) {
                 e.printStackTrace();
             }
         }

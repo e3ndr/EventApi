@@ -35,12 +35,13 @@ public class GsonEventDeserializer<T extends Enum<?>> {
         }
     }
 
-    public static <E extends Enum<E>> Enum<E> parseEnumFromJsonElement(Enum<E>[] values, JsonElement e) {
+    @SuppressWarnings("unchecked")
+    public static <E extends Enum<?>> E parseEnumFromJsonElement(E[] values, JsonElement e) {
         String value = e.getAsString();
 
-        for (Enum<E> en : values) {
+        for (Enum<?> en : values) {
             if (en.name().equalsIgnoreCase(value)) {
-                return en;
+                return (E) en;
             }
         }
 
